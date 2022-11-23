@@ -3,3 +3,31 @@ server:
   port: 8081
   servlet:
     context-path: /v1
+
+spring:
+  # 配置数据源信息
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/bootdo?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+
+# 配置mybatis-plus信息
+mybatis-plus:
+  configuration:
+    # 开启驼峰
+    map-underscore-to-camel-case: true
+    # 打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/*.xml
+  # 全局配置
+#  global-config:
+#    db-config:
+      # 设置统计的主键生成策略
+#      id-type: auto
+    # 全局配置实体类所对应的表的统一前缀
+#      table-prefix: t_
+
+
+

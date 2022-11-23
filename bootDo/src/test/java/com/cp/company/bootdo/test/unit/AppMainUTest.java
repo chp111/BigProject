@@ -6,7 +6,7 @@ import org.junit.Test;
 public class AppMainUTest {
 
     @Test
-    public void test01() {
+    public void startup() {
         System.out.println("启动类--单元测试");
     }
 
