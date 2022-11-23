@@ -137,18 +137,52 @@ public class SysUserMapperITest {
     }
 
     @Test
-    public void test04(){
+    public void test04() {
         // 将名称包含张飞或者年龄大于20岁的信息,名称修改为李白,邮箱修改为LiBai@qq.com
         QueryWrapper<SysUserPoJo> queryWrapper = new QueryWrapper<>();
-        queryWrapper.like("name","张飞")
+        queryWrapper.like("name", "张飞")
                 .or()
-                .gt("age",25);
+                .gt("age", 25);
 
         SysUserPoJo sysUser = new SysUserPoJo();
         sysUser.setName("李白");
         sysUser.setEmail("LiBai@qq.com");
         int result = sysUserMapper.update(sysUser, queryWrapper);
         System.out.println("修改" + result + "条记录");
+    }
+
+    @Test
+    public void test05() {
+        // 条件优先级
+        // 将名称包含李白且(年龄大于20岁或email不为空)的信息进行修改,名称修改为张飞,邮箱修改为zf@qq.com
+        QueryWrapper<SysUserPoJo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.like("name", "李白")
+                .and(t -> t.gt("age", 20)
+                        .or()
+                        .isNotNull("email"));
+        SysUserPoJo sysUser = new SysUserPoJo();
+        sysUser.setName("张飞");
+        sysUser.setEmail("zf@qq.com");
+        int result = sysUserMapper.update(sysUser, queryWrapper);
+        System.out.println("修改" + result + "条记录");
+    }
+
+    @Test
+    public void test06() {
+        // 查询指定字段信息
+        QueryWrapper<SysUserPoJo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("name", "age", "email");
+        List<Map<String, Object>> mapList = sysUserMapper.selectMaps(queryWrapper);
+        mapList.forEach(System.out::println);
+    }
+
+    @Test
+    public void test07() {
+        // 子查询
+        QueryWrapper<SysUserPoJo> queryWrapper = new QueryWrapper<>();
+        queryWrapper.inSql("id", "select id from sys_user where id < 10");
+        List<SysUserPoJo> list = sysUserMapper.selectList(queryWrapper);
+        list.forEach(System.out::println);
     }
 
 }
