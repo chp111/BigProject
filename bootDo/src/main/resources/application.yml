@@ -21,13 +21,23 @@ mybatis-plus:
     # 打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations: classpath*:/mapper/*.xml
-  # 全局配置
+  # 配置类型别名所对应的包名
+  type-aliases-package: com.cp.company.bootdo.pojo
+  # 扫描通用枚举类所在的包
+  type-enums-package: com.cp.company.bootdo.enums
+    # 全局配置
 #  global-config:
 #    db-config:
       # 设置统计的主键生成策略
 #      id-type: auto
     # 全局配置实体类所对应的表的统一前缀
 #      table-prefix: t_
+
+# 配置PageHelper分页插件
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
 
 
 

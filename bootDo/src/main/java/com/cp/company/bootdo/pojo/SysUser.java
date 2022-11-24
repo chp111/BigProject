@@ -1,9 +1,9 @@
 package com.cp.company.bootdo.pojo;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.cp.company.bootdo.enums.SexEnum;
 import lombok.Data;
 
 /**
@@ -14,7 +14,7 @@ import lombok.Data;
 @Data
 // 设置实体类对应的表名
 @TableName("sys_user")
-public class SysUserPoJo {
+public class SysUser {
 
     // 将属性对应的字段指定为表的主键
     // @TableId注解的value属性用于指定主键的字段
@@ -28,10 +28,12 @@ public class SysUserPoJo {
     private Long id;
 
     // @TableField注解用于指定属性对应的字段名
-    @TableField("name")
-    private String name;
+    @TableField("user_name")
+    private String userName;
 
     private Integer age;
 
     private String email;
+
+    private SexEnum sex;
 }

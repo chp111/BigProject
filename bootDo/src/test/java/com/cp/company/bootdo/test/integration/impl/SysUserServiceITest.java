@@ -1,6 +1,7 @@
 package com.cp.company.bootdo.test.integration.impl;
 
-import com.cp.company.bootdo.pojo.SysUserPoJo;
+import com.cp.company.bootdo.enums.SexEnum;
+import com.cp.company.bootdo.pojo.SysUser;
 import com.cp.company.bootdo.service.SysUserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,13 +35,18 @@ public class SysUserServiceITest {
     @Test
     public void testSaveBatch() {
         // 测试mybatis-plus 批量添加功能, 循环执行单笔添加方法
-        List<SysUserPoJo> list = new ArrayList<>();
-        SysUserPoJo sysUser = null;
+        List<SysUser> list = new ArrayList<>();
+        SysUser sysUser = null;
         for (int i = 1; i <= 10; i++) {
-            sysUser = new SysUserPoJo();
-            sysUser.setName("张飞" + i);
+            sysUser = new SysUser();
+            sysUser.setUserName("张飞" + i);
             sysUser.setAge(20 + i);
             sysUser.setEmail("zhangfei" + i + "@qq.com");
+            if (i % 2 == 0) {
+                sysUser.setSex(SexEnum.MALE);
+            } else {
+                sysUser.setSex(SexEnum.FEMALE);
+            }
             list.add(sysUser);
         }
         boolean result = sysUserService.saveBatch(list);

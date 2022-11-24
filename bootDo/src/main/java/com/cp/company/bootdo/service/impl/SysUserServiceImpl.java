@@ -2,7 +2,7 @@ package com.cp.company.bootdo.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cp.company.bootdo.mapper.SysUserMapper;
-import com.cp.company.bootdo.pojo.SysUserPoJo;
+import com.cp.company.bootdo.pojo.SysUser;
 import com.cp.company.bootdo.service.SysUserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -14,5 +14,5 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @Slf4j
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUserPoJo> implements SysUserService {
+public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 }
