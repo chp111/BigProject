@@ -20,7 +20,7 @@ import java.util.UUID;
 @RequestMapping("/order")
 public class OrderController {
 
-    public static final String URL = "http://localhost:8001";
+    public static final String URL = "http://CLOULD-PAYMENT-SERVICE";
 
     @Autowired
     private RestTemplate restTemplate;
