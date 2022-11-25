@@ -1,6 +1,7 @@
 package com.cp.company.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.cp.company.controller.vo.PaymentReqVO;
 import com.cp.company.pojo.Payment;
 import com.cp.company.service.PaymentService;
 import com.cp.company.utils.CommResult;
@@ -9,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.UUID;
 
 /**
  * @author 陈朋
@@ -24,22 +23,33 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
+    /**
+     * 支付成功返回支付订单号
+     *
+     * @param reqVO
+     * @return
+     */
     @PostMapping("/create")
-    public CommResult create() {
+    public CommResult create(@RequestBody PaymentReqVO reqVO) {
         Payment payment = new Payment();
-        String orderNo = UUID.randomUUID().toString().replace("-", "");
-        payment.setOrderNo(orderNo);
+        payment.setOrderNo(reqVO.getOrderNo());
         boolean flag = paymentService.save(payment);
         if (!flag) {
             return new CommResult(444, "支付失败!");
         }
-        return new CommResult(200, "支付成功!", orderNo);
+        return new CommResult(200, "支付成功!", reqVO.getOrderNo());
     }
 
+    /**
+     * 根据支付编号查询一笔支付信息
+     *
+     * @param reqVO
+     * @return
+     */
     @PostMapping("/queryDetail")
-    public CommResult queryDetail(@RequestBody Payment paymentVO) {
+    public CommResult queryDetail(@RequestBody PaymentReqVO reqVO) {
         LambdaQueryWrapper<Payment> queryWrapper = new LambdaQueryWrapper();
-        queryWrapper.eq(Payment::getOrderNo, paymentVO.getOrderNo());
+        queryWrapper.eq(Payment::getOrderNo, reqVO.getOrderNo());
         Payment payment = paymentService.getOne(queryWrapper);
         return new CommResult(200, "查询成功!", payment);
     }
