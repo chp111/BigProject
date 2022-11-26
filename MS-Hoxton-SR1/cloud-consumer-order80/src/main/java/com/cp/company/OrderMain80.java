@@ -3,7 +3,7 @@ package com.cp.company;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @author 陈朋
@@ -12,7 +12,7 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
  */
 @SpringBootApplication
 @MapperScan("com.cp.company.mapper")
-@EnableEurekaClient
+@EnableDiscoveryClient //开启服务注册与发现
 public class OrderMain80 {
 
     public static void main(String[] args) {
