@@ -11,8 +11,6 @@
         <module>cloud-provider-payment8001</module>
         <module>cloud-consumer-order80</module>
         <module>cloud-common-api</module>
-        <module>cloud-server-eureka7001</module>
-        <module>cloud-server-eureka7002</module>
         <module>cloud-provider-payment8002</module>
     </modules>
     <packaging>pom</packaging>
@@ -30,6 +28,9 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <pagehelper.version>1.4.1</pagehelper.version>
         <hutool.version>5.1.0</hutool.version>
+        <zookeeper.version>3.4.9</zookeeper.version>
+        <curator-recipes.version>4.2.0</curator-recipes.version>
+        <curator-framework.version>4.2.0</curator-framework.version>
     </properties>
 
     <!-- 子模块继承之后,提供作用,锁定版本+子module不用写version,只声明并不实现引入   -->
@@ -103,6 +104,31 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <!-- zookeeper 满足CP原则
+             注册中心 自带了slf4j这个jar包,会和starter中的冲突,需要排除-->
+            <dependency>
+                <groupId>org.apache.zookeeper</groupId>
+                <artifactId>zookeeper</artifactId>
+                <version>${zookeeper.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>slf4j-log4j12</artifactId>
+                        <groupId>org.slf4j</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- 基于zookeeper实现分布式锁 start -->
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-recipes</artifactId>
+                <version>${curator-recipes.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.curator</groupId>
+                <artifactId>curator-framework</artifactId>
+                <version>${curator-framework.version}</version>
+            </dependency>
+            <!-- 基于zookeeper实现分布式锁 end -->
         </dependencies>
     </dependencyManagement>
 

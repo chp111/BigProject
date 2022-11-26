@@ -3,10 +3,7 @@ package com.cp.company.controller;
 import com.cp.company.controller.vo.PaymentReqVO;
 import com.cp.company.utils.CommResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.UUID;
@@ -20,7 +17,11 @@ import java.util.UUID;
 @RequestMapping("/order")
 public class OrderController {
 
-    public static final String URL = "http://CLOULD-PAYMENT-SERVICE";
+    /**
+     * 服务注册名严格区分大小写
+     * 根据经验, Eureka上面是大写,而zookeeper上面服务注册名称是小写
+     */
+    public static final String URL = "http://clould-payment-service";
 
     @Autowired
     private RestTemplate restTemplate;
@@ -49,6 +50,15 @@ public class OrderController {
     public CommResult queryDetail(@RequestBody PaymentReqVO reqVO) {
         return restTemplate.postForObject(URL + "/payment/queryDetail", reqVO, CommResult.class);
     }
+
+    /**
+     * 扣款
+     */
+    @GetMapping("/subtractBalance")
+    public CommResult subtractBalance(@RequestParam String userName) {
+        return restTemplate.getForObject(URL + "/accBalance/subtractMoney?userName=" + userName, CommResult.class);
+    }
+
 
 }
 
