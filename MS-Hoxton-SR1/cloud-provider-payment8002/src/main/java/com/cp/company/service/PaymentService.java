@@ -1,4 +1,4 @@
-package com.cp.company.feign;
+package com.cp.company.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cp.company.pojo.Payment;

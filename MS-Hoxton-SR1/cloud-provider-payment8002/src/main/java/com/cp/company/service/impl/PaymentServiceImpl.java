@@ -1,9 +1,10 @@
-package com.cp.company.feign.impl;
+package com.cp.company.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cp.company.mapper.PaymentMapper;
 import com.cp.company.pojo.Payment;
-import com.cp.company.feign.PaymentService;
+import com.cp.company.service.PaymentService;
+import com.cp.company.service.PaymentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
