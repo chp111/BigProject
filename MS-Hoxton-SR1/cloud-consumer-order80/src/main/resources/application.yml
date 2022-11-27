@@ -46,6 +46,10 @@ logging:
     # feign日志以哪种级别监控哪个feign接口的日志
     com.cp.company.feign.PaymentServiceFeign: debug
 
+feign:
+  hystrix:
+    # 服务消费端开启Hystrix服务降级
+    enabled: true
 
 provider:
   name:
