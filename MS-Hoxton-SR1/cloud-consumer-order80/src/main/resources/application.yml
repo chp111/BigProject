@@ -12,6 +12,9 @@ spring:
     url: jdbc:mysql://localhost:3307/ms_hoxton_sr1_order?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false&serverTimezone=UTC
     username: root
     password: root
+  # 允许存在多个Feign调用相同服务提供者的接口(默认为false)
+  main:
+    allow-bean-definition-overriding: true
 
 # 配置服务注册
 eureka:
@@ -35,7 +38,7 @@ ribbon:
   # 指定是建立连接所用的时间,适用于网络状况良好的情况下,两端连接所用的时间,单位:毫秒
   ReadTimeout: 5000
   # 指的是建立连接后从服务器读取到数据资源所用时间,单位:毫秒
-  ConnectTimeout: 30000
+  ConnectTimeout: 6000
 
 # 配置OpenFeign日志增强
 logging:
