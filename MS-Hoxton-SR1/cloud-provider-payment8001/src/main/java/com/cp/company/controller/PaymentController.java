@@ -3,7 +3,7 @@ package com.cp.company.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cp.company.controller.vo.PaymentReqVO;
 import com.cp.company.pojo.Payment;
-import com.cp.company.feign.PaymentService;
+import com.cp.company.service.PaymentService;
 import com.cp.company.utils.CommResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
