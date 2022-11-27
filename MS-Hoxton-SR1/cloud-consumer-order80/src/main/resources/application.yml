@@ -50,8 +50,8 @@ provider:
     payment: CLOULD-PAYMENT-SERVICE
 
 # 配置mybatis-plus信息
-  configuration:
 mybatis-plus:
+  configuration:
     # 开启驼峰
     map-underscore-to-camel-case: true
     # 打印sql

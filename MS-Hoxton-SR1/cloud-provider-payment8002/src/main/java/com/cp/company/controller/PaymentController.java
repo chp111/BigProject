@@ -3,7 +3,7 @@ package com.cp.company.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cp.company.controller.vo.PaymentReqVO;
 import com.cp.company.pojo.Payment;
-import com.cp.company.feign.PaymentService;
+import com.cp.company.service.PaymentService;
 import com.cp.company.utils.CommResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author 陈朋
@@ -68,6 +69,11 @@ public class PaymentController {
         LambdaQueryWrapper<Payment> queryWrapper = new LambdaQueryWrapper();
         queryWrapper.eq(Payment::getOrderNo, reqVO.getOrderNo());
         Payment payment = paymentService.getOne(queryWrapper);
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String serverPortInfo = "sererPort: " + serverPort;
         return new CommResult(200, serverPortInfo + "查询成功!", payment);
     }
