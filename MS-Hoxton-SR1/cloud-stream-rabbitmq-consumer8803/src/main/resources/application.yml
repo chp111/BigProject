@@ -1,0 +1,35 @@
+# 配置端口信息
+server:
+  port: 8803
+
+spring:
+  application:
+    name: clould-stream-consumer
+  cloud:
+    stream:
+      binders:
+        defaultRabbit:
+          type: rabbit
+          environment:
+            spring:
+              rabbitmq:
+                host: 127.0.0.1
+                port: 5672
+                username: guest
+                password: guest
+      bindings:
+        input:
+          destination: studyExchange
+          content-type: application/json
+          binder: defaultRabbit
+          group: com.cp.company
+
+# 配置服务注册
+eureka:
+  client:
+    # 表示将自己注册进EurekaServer,默认为true
+    register-with-eureka: true
+    # 是否从EurekaServer抓取已有的注册信息,默认为true. 单节点无所谓,集群必须设置为true,才能配置ribbon使用负载均衡
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:7001/eureka
