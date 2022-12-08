@@ -12,6 +12,7 @@
         <module>cloud-consumer-order80</module>
         <module>cloud-common-api</module>
         <module>cloud-provider-payment8002</module>
+        <module>alibaba-nacos-config-client3377</module>
     </modules>
     <packaging>pom</packaging>
 
