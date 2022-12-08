@@ -3,6 +3,7 @@ package com.cp.company.controller;
 import com.cp.company.controller.vo.PaymentReqVO;
 import com.cp.company.utils.CommResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +23,9 @@ public class OrderController {
 
     public static final String URL = "http://CLOULD-PAYMENT-SERVICE";
 
+    @Value("${service.provider.prefixUrl}")
+    private String prefixUrl;
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -35,7 +39,7 @@ public class OrderController {
         PaymentReqVO payment = new PaymentReqVO();
         String orderNo = UUID.randomUUID().toString().replace("-", "");
         payment.setOrderNo(orderNo);
-        return restTemplate.postForObject(URL + "/payment/create", payment, CommResult.class);
+        return restTemplate.postForObject(prefixUrl + "/payment/create", payment, CommResult.class);
     }
 
 
@@ -47,7 +51,7 @@ public class OrderController {
      */
     @PostMapping("/queryDetail")
     public CommResult queryDetail(@RequestBody PaymentReqVO reqVO) {
-        return restTemplate.postForObject(URL + "/payment/queryDetail", reqVO, CommResult.class);
+        return restTemplate.postForObject(prefixUrl + "/payment/queryDetail", reqVO, CommResult.class);
     }
 
 }
