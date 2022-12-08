@@ -6,10 +6,7 @@ import com.cp.company.pojo.Payment;
 import com.cp.company.service.PaymentService;
 import com.cp.company.utils.CommResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 陈朋
@@ -52,5 +49,13 @@ public class PaymentController {
         queryWrapper.eq(Payment::getOrderNo, reqVO.getOrderNo());
         Payment payment = paymentService.getOne(queryWrapper);
         return new CommResult(200, "查询成功!", payment);
+    }
+
+    /**
+     * zipkin使用演示示例`
+     */
+    @GetMapping("/zipkin")
+    public String paymentZipkin(String s) {
+        return "zipkin 演示示例返回成功";
     }
 }

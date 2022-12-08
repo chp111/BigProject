@@ -3,10 +3,7 @@ package com.cp.company.controller;
 import com.cp.company.controller.vo.PaymentReqVO;
 import com.cp.company.utils.CommResult;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.UUID;
@@ -48,6 +45,20 @@ public class OrderController {
     @PostMapping("/queryDetail")
     public CommResult queryDetail(@RequestBody PaymentReqVO reqVO) {
         return restTemplate.postForObject(URL + "/payment/queryDetail", reqVO, CommResult.class);
+    }
+
+    /**
+     * 模拟zipkin
+     */
+    /**
+     * 调用查询支付信息服务
+     *
+     * @param
+     * @return
+     */
+    @GetMapping("/zipkin")
+    public String zipkin() {
+        return restTemplate.getForObject(URL + "/payment/zipkin", String.class);
     }
 
 }
